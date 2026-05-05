@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aman's 29th</title>
+  <link rel="stylesheet" href="https://use.typekit.net/fnh1bhl.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #000;
+      --surface: rgba(255,255,255,0.05);
+      --surface-hover: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.10);
+      --border-strong: rgba(255,255,255,0.20);
+      --text: #fff;
+      --text-2: rgba(255,255,255,0.55);
+      --text-3: rgba(255,255,255,0.28);
+      --radius-sm: 10px;
+      --radius: 16px;
+      --radius-lg: 22px;
+      --font-display: "neue-haas-grotesk-display-pr", sans-serif;
+      --font-body: "neue-haas-grotesk-display-pr", sans-serif;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-display);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+/* ========================= */
+/* AMBIENT ORBS (ENHANCED)   */
+/* ========================= */
+
+.ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0;
+  animation: orbFloat 24s ease-in-out infinite;
+}
+
+/* Individual orb styling + variation */
+
+.orb-1 {
+  width: 700px;
+  height: 700px;
+  top: -250px;
+  left: -200px;
+  background: radial-gradient(circle, rgba(172,90,248,1), transparent 70%);
+  animation-duration: 26s;
+}
+
+.orb-2 {
+  width: 500px;
+  height: 500px;
+  top: 25%;
+  right: -200px;
+  background: radial-gradient(circle, rgba(164,211,184,1), transparent 70%);
+  animation-duration: 20s;
+  animation-delay: -6s;
+}
+
+.orb-3 {
+  width: 600px;
+  height: 600px;
+  bottom: -200px;
+  left: 5%;
+  background: radial-gradient(circle, rgba(51,8,226,1), transparent 70%);
+  animation-duration: 30s;
+  animation-delay: -12s;
+}
+
+/* Enhanced motion */
+
+@keyframes orbFloat {
+  0% {
+    opacity: 0;
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  25% {
+    transform: translate(140px, -100px) scale(1.05) rotate(20deg);
+  }
+
+  50% {
+    transform: translate(-60px, -120px) scale(1.1) rotate(40deg);
+  }
+
+  75% {
+    transform: translate(100px, -40px) scale(1.04) rotate(60deg);
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+}
+
+/* LAYOUT */
+.wrap { position:relative; z-index:1; max-width:520px; width:100%; margin:0 auto; padding:0 24px; }
+.screen { display:none; min-height:100vh; padding:80px 0 90px; flex-direction:column; justify-content:center; }
+.screen.active { display:flex; }
+
+/* stagger children */
+.screen.active > .wrap > * { animation: fadeUp 0.55s var(--ease-out) both; }
+.screen.active > .wrap > *:nth-child(1){animation-delay:0.00s}
+.screen.active > .wrap > *:nth-child(2){animation-delay:0.07s}
+.screen.active > .wrap > *:nth-child(3){animation-delay:0.13s}
+.screen.active > .wrap > *:nth-child(4){animation-delay:0.19s}
+.screen.active > .wrap > *:nth-child(5){animation-delay:0.25s}
+.screen.active > .wrap > *:nth-child(6){animation-delay:0.31s}
+.screen.active > .wrap > *:nth-child(7){animation-delay:0.37s}
+.screen.active > .wrap > *:nth-child(8){animation-delay:0.43s}
+@keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+/* TYPE */
+.eyebrow { font-family: var(--font-body); font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-3); margin-bottom:14px; }
+.display {  font-family: var(--font-display); font-size:clamp(56px,14vw,96px); font-weight:600; line-height:0.93; letter-spacing:-0.02em; }
+.display-sm {  font-family: var(--font-display); font-size:clamp(38px,9vw,64px); font-weight:600; line-height:0.95; letter-spacing:-0.03em; }
+.body-lg {  font-family: var(--font-body); font-size:17px; font-weight:500; line-height:1.65; color:var(--text-2); letter-spacing: 0.01em;}
+.body {  font-family: var(--font-body); font-size:15px; font-weight:500; line-height:1.6; color:var(--text-2); letter-spacing: 0.01em;}
+.label {  font-family: var(--font-body); font-size:11px; font-weight:500; letter-spacing:0.10em; text-transform:uppercase; color:var(--text-3); }
+
+/* INFO CARDS */
+.info-row { display:flex; flex-direction:column; gap:8px; margin:28px 0 36px; }
+.info-card { display:flex; flex:1; align-items:center; gap:14px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px 18px; backdrop-filter:blur(20px); }
+.info-card-icon { font-size:16px; flex-shrink:0; opacity:0.8; }
+.info-card-text { font-size:14px; color:var(--text-2); line-height:1.4; }
+
+/* INPUTS */
+input[type="text"], textarea {
+  width:100%; background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); padding:18px 20px;
+  font-family:var(--font-body); font-size:17px; color:var(--text);
+  outline:none; transition:border-color 0.25s, background 0.25s;
+  backdrop-filter:blur(20px); -webkit-appearance:none;
+}
+input[type="text"]:focus, textarea:focus { border-color:var(--border-strong); background:var(--surface-hover); }
+input[type="text"]::placeholder, textarea::placeholder { color:var(--text-3); }
+
+/* ATTEND TOGGLE */
+.attend-row { display:flex; gap:10px; margin:20px 0 26px; }
+.attend-opt { flex:1; flex-grow:1; padding:14px; border-radius:var(--radius); border:1px solid var(--border); background:var(--surface); color:var(--text-2); font-family:var(--font-body); font-size:14px; font-weight: 500;cursor:pointer; text-align:center; transition:all 0.2s; backdrop-filter:blur(20px); }
+.attend-opt.active { border-color:var(--border-strong); background:var(--surface-hover); color:var(--text); font-weight: 600;}
+.not-attending-note { display:none; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px 20px; font-size:14px; font-weight: 500; letter-spacing: 0.01em; color:var(--text-2); line-height:1.6; margin-bottom:24px; animation:fadeUp 0.4s var(--ease-out) both; }
+
+/* BUTTONS */
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:16px 32px;
+  border-radius:50px;
+  border:none;
+  font-family:var(--font-body);
+  font-size:15px;
+  font-weight:500;
+  letter-spacing: 0.01em;
+  cursor:pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+}
+.btn:active {
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.3);
+  transform: translateY(0) scale(0.97);
+  font-weight: 700;
+}
+.btn-white { background:#fff; color:#000; font-weight: 600;}
+.btn-glass { background:var(--surface); color:var(--text); border:1px solid var(--border); backdrop-filter:blur(20px); }
+.btn-full { width:100%; }
+
+/* QUIZ */
+.progress-track { width:100%; height:1px; background:rgba(255,255,255,0.12); margin-bottom:52px; position:relative; }
+.progress-fill { height:100%; background:#fff; transition:width 0.5s var(--ease-out); position:relative; }
+.progress-fill::after { content:''; position:absolute; right:-3px; top:50%; transform:translateY(-50%); width:6px; height:6px; border-radius:50%; background:#fff; }
+.q-counter { font-size:12px; font-weight:500; letter-spacing:0.10em; color:var(--text-3); margin-bottom:20px; }
+.q-text { font-size:clamp(24px,6vw,36px); font-weight:700; letter-spacing:-0.02em; line-height:1.2; margin-bottom:36px; }
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* 👈 mobile = single column */
+  gap: 10px;
+}
+.option-btn { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px 18px; text-align:left; cursor:pointer; transition:border-color 0.2s, background 0.2s, transform 0.15s; backdrop-filter:blur(20px); }
+.option-btn:hover { border-color:var(--border-strong); background:var(--surface-hover); transform:translateY(-2px); }
+.option-btn:active { border-color:rgba(255,255,255,0.45); background:rgba(255,255,255,0.10); }
+.option-btn.selected { border-color:rgba(255,255,255,0.45); background:rgba(255,255,255,0.10); }
+.option-emoji { display:block; font-size:24px; margin-bottom:10px; }
+.option-label { font-size:14px; color:var(--text-2); line-height:1.45; font-family:var(--font-body); letter-spacing:0.01em; }
+.option-btn.selected .option-label { color:var(--text); }
+
+/* SONG REVEAL */
+#s-song { position:relative; overflow:hidden; }
+.song-bg {
+  position: fixed;
+  inset: -80px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(20px) saturate(1.9) brightness(0.5);
+  transform: scale(1.15);
+  z-index: -1;
+  transition: background-image 0.8s ease, filter 0.8s ease;
+  animation: bgFloat 20s ease-in-out infinite;
+}
+@keyframes bgFloat {
+  0%   { transform: scale(1.18) translate(0px, 0px); }
+  25%  { transform: scale(1.22) translate(30px, -20px); }
+  50%  { transform: scale(1.25) translate(-25px, 25px); }
+  75%  { transform: scale(1.22) translate(20px, 30px); }
+  100% { transform: scale(1.18) translate(0px, 0px); }
+}
+50% { transform: scale(1.18) translate(10px, -10px); }
+100% { transform: scale(1.15) translate(0px, 0px); }
+}
+.song-bg-overlay { position:fixed; inset:0; background:linear-gradient(to bottom,rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.65) 100%); z-index:0; }
+#s-song .wrap { position:relative; z-index:1; }
+
+.album-art {
+  width: 260px;
+  height: 260px;
+  border-radius: 22px;
+  margin: 0 auto 32px;
+  position: relative;
+  box-shadow: 0 36px 90px rgba(0,0,0,0.6);
+  overflow: hidden;
+  transition: background 0.8s ease, transform 0.4s ease;
+}
+.album-art img { width:100%; height:100%; object-fit:cover; display:block; }
+.album-art-placeholder { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:60px; }
+
+.song-meta { text-align:center; margin-bottom:28px; }
+.song-name { font-size:clamp(26px,7vw,42px); font-weight:700; letter-spacing:-0.025em; line-height:1.1; margin-bottom:6px; }
+.song-artist-name { font-size:16px; color:var(--text-2); }
+
+.glass-card { background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.12); border-radius:var(--radius); padding:20px 22px; margin-bottom:12px; backdrop-filter:blur(30px); }
+.card-row { display:flex; gap:12px; align-items:flex-start; }
+.card-icon { font-size:18px; flex-shrink:0; margin-top:1px; }
+.card-text { font-size:14px; color:rgba(255,255,255,0.7); line-height:1.65; }
+.card-title { font-size:13px; font-weight:600; color:#fff; margin-bottom:3px; }
+.card-sub { font-size:12px; color:rgba(255,255,255,0.45); line-height:1.5; }
+
+/* DETAILS SCREEN */
+.section-label { font-size:11px; font-weight:600; letter-spacing:0.10em; text-transform:uppercase; color:var(--text-3); margin-bottom:14px; margin-top:44px; }
+.detail-list { border-top:1px solid var(--border); }
+.detail-row { display:flex; align-items:flex-start; gap:16px; padding:18px 0; border-bottom:1px solid var(--border); }
+.detail-icon { font-size:17px; flex-shrink:0; margin-top:2px; opacity:0.65; }
+.detail-key { font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-3); margin-bottom:4px; }
+.detail-val { font-size:16px; font-weight:500; line-height:1.4; }
+.detail-sub { font-size:13px; color:var(--text-2); margin-top:2px; }
+
+.chip-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:18px; }
+.chip { display:inline-flex; align-items:center; gap:7px; padding:10px 18px; border-radius:50px; border:1px solid var(--border); background:var(--surface); color:var(--text); font-family:var(--font-body); font-size:13px; font-weight:500; cursor:pointer; text-decoration:none; transition:border-color 0.2s, background 0.2s; backdrop-filter:blur(20px); }
+.chip:hover { border-color:var(--border-strong); background:var(--surface-hover); }
+
+.map-wrap { border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); margin-top:16px; }
+.embed-group { display:flex; flex-direction:column; gap:12px; }
+.embed-wrap { border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); }
+
+/* DRAW */
+#drawCanvas { width:100%; aspect-ratio:4/3; border-radius:var(--radius); border:1px solid var(--border); background:rgba(255,255,255,0.1); cursor:crosshair; display:block; touch-action:none; }
+.draw-controls { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:12px; }
+.swatch { width:24px; height:24px; border-radius:50%; border:2px solid transparent; cursor:pointer; transition:transform 0.15s, border-color 0.15s; flex-shrink:0; }
+.swatch.active { border-color:rgba(255,255,255,0.7); transform:scale(1.25); }
+.tool-btn { background:var(--surface); border:1px solid var(--border); color:var(--text-2); border-radius:8px; padding:5px 12px; font-size:12px; cursor:pointer; font-family:var(--font-body); transition:border-color 0.2s, color 0.2s; }
+.tool-btn:hover { border-color:var(--border-strong); color:var(--text); }
+textarea { resize:none; min-height:100px; font-size:15px; }
+
+/* DONE */
+.done-hero {
+  font-size: 60px;
+  margin-bottom: 24px;
+
+  animation:
+  bumpIn 0.6s var(--ease-out) both,
+  floaty 3s ease-in-out infinite 0.6s;
+}
+
+/* subtle float loop */
+@keyframes floaty {
+  0%   { transform: translateY(0px) scale(1); }
+  50%  { transform: translateY(-8px) scale(1.03); }
+  100% { transform: translateY(0px) scale(1); }
+}
+@keyframes bumpIn { from{transform:scale(0.4);opacity:0} 65%{transform:scale(1.12)} to{transform:scale(1);opacity:1} }
+
+/* UTILS */
+.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}
+.mt-20{margin-top:20px}.mt-24{margin-top:24px}.mt-32{margin-top:32px}
+.mb-8{margin-bottom:8px}.mb-12{margin-bottom:12px}.mb-16{margin-bottom:16px}
+.mb-24{margin-bottom:24px}.mb-32{margin-bottom:32px}
+
+#songEmbed {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: min(520px, 92%);
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.album-art::before {
+  content:"";
+  position:absolute;
+  inset:-20px;
+  border-radius:24px;
+  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+  z-index:-1;
+  filter:blur(20px);
+  opacity:0.6;
+}
+
+#bgTint {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 60%);
+  mix-blend-mode: overlay;
+  z-index: -1;
+  transition: background 1s ease;
+}
+
+.hero{
+  width:100%;
+  max-width: 600px;
+  margin:0 auto 24px;
+  display:block;
+  border-radius:18px;
+  object-fit:cover;
+}
+
+/* Hide orbs */
+.ambient.hidden {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+/* ========================= */
+/* RESPONSIVE IMPROVEMENTS   */
+/* ========================= */
+
+/* Tablets and up */
+@media (min-width: 768px) {
+
+  .wrap {
+    max-width: 640px;
+    padding: 0 32px;
+  }
+
+  .screen {
+    width: 100%;
+    padding: 100px 0 120px;
+  }
+
+  .info-row {
+    margin: 32px 0 44px;
+  }
+
+  .options-grid {
+    gap: 14px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .album-art {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* Desktop and up */
+@media (min-width: 1024px) {
+
+  .wrap {
+    max-width: 900px;
+  }
+
+/* Split layout for certain sections */
+.info-row {
+  flex-direction: row;
+  gap: 16px;
+}
+
+.info-card {
+  flex: 1;
+}
+
+/* Quiz options feel nicer in wider grid */
+.options-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* Preferences alcohol grid becomes 3 columns */
+#alcoholOptions {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Detail spacing refinement */
+.detail-row {
+  padding: 20px 0;
+}
+
+/* Draw canvas gets a bit more breathing room */
+
+#s-song .wrap {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+/* LEFT: album */
+.album-art {
+  margin: 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+/* RIGHT SIDE GROUP */
+#s-song .wrap {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.album-art {
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.song-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 460px;
+}
+
+.song-content * {
+  margin: 0;
+}
+
+.song-meta {
+  text-align: left;
+}
+
+#songCTA {
+  margin-top: 8px;
+}
+
+.orb-1 {
+  width: 1000px;
+  height: 1000px;
+  top: -300px;
+  left: -250px;
+}
+
+.orb-2 {
+  width: 700px;
+  height: 700px;
+  right: -250px;
+}
+
+.orb-3 {
+  width: 900px;
+  height: 900px;
+  bottom: -300px;
+}
+
+}
+
+/* Large desktop */
+@media (min-width: 1280px) {
+
+  .wrap {
+    max-width: 1024px;
+  }
+
+  .display {
+    font-size: clamp(64px, 8vw, 110px);
+  }
+
+  .display-sm {
+    font-size: clamp(44px, 6vw, 72px);
+  }
+}
+/* FIX QUIZ HEIGHT JUMP */
+#s-quiz .wrap {
+  min-height: 520px; /* keeps layout stable */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.q-text {
+  min-height: 90px; /* locks question area */
+}
+
+.options-grid {
+  min-height: 220px; /* locks option area */
+  transition: opacity 0.2s ease;
+
+}
+
+/* GIFT GRID */
+
+.gift-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Desktop → 4 in a row */
+@media (min-width: 1024px) {
+  .gift-list {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+}
+
+.gift-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  backdrop-filter: blur(20px);
+
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+
+.gift-card:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-hover);
+  transform: translateY(-3px);
+}
+
+/* IMAGE */
+
+.gift-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* TEXT */
+
+.gift-info {
+  flex: 1;
+}
+
+.gift-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.gift-sub {
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+/* BUTTON */
+
+.gift-btn {
+  margin-top: auto;
+
+  padding: 10px;
+  border-radius: 999px;
+
+  background: #fff;
+  color: #000;
+
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gift-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+}
+
+.gift-btn:active {
+  transform: scale(0.96);
+}
+
+/* FOOD OPTIONS — FULL WIDTH HORIZONTAL */
+#s-preferences .attend-row {
+  display: flex;
+  width: 100%;
+  gap: 12px;
+}
+
+#s-preferences .attend-row .option-btn {
+  flex: 1; /* 👈 this is the key */
+  width: 100%;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+  <div class="song-bg" id="songBg"></div>
+  <div class="song-bg-overlay"></div>
+  <div id="bgTint"></div>
+
+  <div class="ambient">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+<!-- ── SCREEN 1: LANDING ── -->
+<div class="screen active" id="s-landing">
+  <div class="wrap">
+    <img src="bdayyay.jpg" class="hero" alt="Birthday">
+    <h1 class="display">Aman's <br>29th.</h1>
+    <p class="body-lg mt-20">You're invited. Fill this in to confirm your presence. There's also a little something waiting on the other side.</p>
+
+    <div class="info-row">
+      <div class="info-card"><span class="info-card-icon">📝</span><span class="info-card-text">A quick 5-question quiz to figure out your vibe</span></div>
+      <div class="info-card"><span class="info-card-icon">💃🏼</span><span class="info-card-text">You'll get a song assigned to you which will be your outfit brief</span></div>
+      <div class="info-card"><span class="info-card-icon">🏆</span><span class="info-card-text">Best outfit match on the night wins a prize</span></div>
+    </div>
+
+    <p class="label mb-8">Your name</p>
+    <input type="text" id="nameInput" placeholder="Type your name" autocomplete="name" />
+
+    <div class="attend-row">
+      <button class="attend-opt active" id="optYes" onclick="setAttend(true)">✅ &nbsp &nbsp I'll be there</button>
+      <button class="attend-opt" id="optNo" onclick="setAttend(false)">😢&nbsp &nbsp Can't make it</button>
+    </div>
+
+    <div class="not-attending-note" id="notAttendingNote">
+      No worries, you'll still get the quiz and your song. Consider it a party favour from afar &nbsp 🎁
+    </div>
+
+    <button class="btn btn-white btn-full" onclick="startQuiz()">Let's go →</button>
+  </div>
+</div>
+
+<!-- ── SCREEN: PREFERENCES ── -->
+<div class="screen" id="s-preferences">
+  <div class="wrap">
+
+    <p class="eyebrow">Quick details</p>
+    <h2 class="display-sm">Before we<br>start.</h2><br><br><br>
+
+    <p class="label mb-8">Food preference</p>
+    <div class="attend-row">
+      <button class="option-btn" id="foodVeg" onclick="setFood('veg')"><span class="option-emoji">🥦</span><span class="option-label">Veg</span></button>
+      <button class="option-btn" id="foodNonVeg" onclick="setFood('nonveg')"><span class="option-emoji">🍗</span><span class="option-label">Non-Veg</span></button>
+    <!-- <button class="attend-opt" id="foodVeg" onclick="setFood('veg')">🥦 Veg </button>
+    <button class="attend-opt" id="foodNonVeg" onclick="setFood('nonveg')">🍗 Non-veg</button> -->
+  </div>
+
+  <p class="label mb-8">Alcohol preference</p>
+  <div class="options-grid" id="alcoholOptions">
+    <button class="option-btn" onclick="setAlcohol(event,'none')"><span class="option-emoji">🚫</span><span class="option-label">No Alcohol</span></button>
+    <button class="option-btn" onclick="setAlcohol(event,'wine')"><span class="option-emoji">🍷</span><span class="option-label">Wine</span></button>
+    <button class="option-btn" onclick="setAlcohol(event,'beer')"><span class="option-emoji">🍺</span><span class="option-label">Beer</span></button>
+    <button class="option-btn" onclick="setAlcohol(event,'vodka')"><span class="option-emoji">🇷🇺</span><span class="option-label">Vodka</span></button>
+    <button class="option-btn" onclick="setAlcohol(event,'gin')"><span class="option-emoji">🍸</span><span class="option-label">Gin</span></button>
+    <button class="option-btn" onclick="setAlcohol(event,'tequila')"><span class="option-emoji">🌶️</span><span class="option-label">Tequila</span></button>
+    <button class="option-btn" onclick="setAlcohol(event,'whiskey')"><span class="option-emoji">🥃</span><span class="option-label">Whiskey</span></button>
+    <button class="option-btn" onclick="setAlcohol(event,'rum')"><span class="option-emoji">🍹</span><span class="option-label">Rum</span></button>
+    <button class="option-btn" onclick="setAlcohol(event,'other')"><span class="option-emoji">✍️</span><span class="option-label">Something Else</span></button>
+    <!-- <button class="attend-opt" onclick="setAlcohol(event,'none')">🚫 No alcohol</button>
+    <button class="attend-opt" onclick="setAlcohol(event,'wine')">🍷 Wine</button>
+    <button class="attend-opt" onclick="setAlcohol(event,'beer')">🍺 Beer</button>
+    <button class="attend-opt" onclick="setAlcohol(event,'vodka')">🇷🇺 Vodka</button>
+    <button class="attend-opt" onclick="setAlcohol(event,'gin')">🍸 Gin</button>
+    <button class="attend-opt" onclick="setAlcohol(event,'tequila')">🌶️ Tequila</button>
+    <button class="attend-opt" onclick="setAlcohol(event,'whiskey')">🥃 Whiskey</button>
+    <button class="attend-opt" onclick="setAlcohol(event,'rum')">🍹 Rum</button>
+    <button class="attend-opt" onclick="setAlcohol(event,'other')">✍️ Something else</button> -->
+  </div>
+
+  <input type="text" id="customAlcohol" placeholder="Type your drink"
+  style="display:none;margin-top:10px;">
+
+  <button class="btn btn-white btn-full mt-24" onclick="startQuizFromPrefs()">
+    Continue →
+  </button>
+
+</div>
+</div>
+
+<!-- ── SCREEN 2: QUIZ ── -->
+<div class="screen" id="s-quiz">
+  <div class="wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <p class="q-counter" id="qNumber">1 / 5</p>
+    <h2 class="q-text" id="qText"></h2>
+    <div class="options-grid" id="optionsGrid"></div>
+  </div>
+</div>
+
+<!-- ── SCREEN 3: SONG REVEAL ── -->
+<div class="screen" id="s-song" style="padding-bottom:140px;">
+  <div class="wrap">
+
+    <div class="album-art" id="albumArt" style="background:linear-gradient(135deg,#3a1c71,#d76d77,#ffaf7b)">
+      <div class="album-art-placeholder" id="albumPlaceholder">🎵</div>
+      <img id="albumImg" src="" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+    </div>
+
+    <div class="song-content">
+      <p class="eyebrow">your song is</p>
+
+      <div class="song-meta">
+        <h2 class="song-name" id="revealTitle"></h2>
+        <p class="song-artist-name" id="revealArtist"></p>
+      </div>
+
+      <div class="glass-card">
+        <p class="card-text" id="revealVibe"></p>
+      </div>
+
+      <div class="glass-card">
+        <div class="card-row">
+          <span class="card-icon">👗</span>
+          <p class="card-text" id="songOutfitHint"></p>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <div class="card-row">
+          <span class="card-icon">🏆</span>
+          <div>
+            <p class="card-title">There's a prize for the best match</p>
+            <p class="card-sub">Whoever nails their outfit to their song wins something on the night.</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-white btn-full" onclick="goToDetails()">See party details →</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── SCREEN 4: PARTY DETAILS ── -->
+<div class="screen" id="s-details" style="padding-bottom:140px;">
+  <div class="wrap">
+
+    <p class="eyebrow">You're in.</p>
+    <h2 class="display-sm" id="detailsHeadline">See you<br>there.</h2>
+    <p class="body mt-16 mb-32" id="detailsIntro"></p>
+
+    <p class="section-label">The details</p>
+    <div class="detail-list">
+      <div class="detail-row"><span class="detail-icon">🗓</span><div><p class="detail-key">Date</p><p class="detail-val">Saturday, May 30th 2026</p></div></div>
+      <div class="detail-row"><span class="detail-icon">🕗</span><div><p class="detail-key">Time</p><p class="detail-val">8:00 PM onwards</p></div></div>
+      <div class="detail-row"><span class="detail-icon">📍</span><div><p class="detail-key">Venue</p><p class="detail-val">A-21, Sector 53, Noida</p></div></div>
+      <div class="detail-row"><span class="detail-icon">👗</span><div><p class="detail-key">Dress code</p><p class="detail-val">Dress as your song</p><p class="detail-sub">Let your anthem inspire the fit</p></div></div>
+    </div>
+
+    <div class="chip-row">
+      <a class="chip" href="#" onclick="addToCalendar(event)">🗓 Add to calendar</a>
+      <a class="chip" href="https://maps.app.goo.gl/phDzMMVK81Nhs7Pc7" target="_blank">📍 Open in Maps</a>
+    </div>
+
+    <div class="map-wrap mt-16">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d7006.450830220968!2d77.36381790000002!3d28.59301370000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjjCsDM1JzM1LjAiTiA3N8KwMjEnNDkuNSJF!5e0!3m2!1sen!2sin!4v1777689297724!5m2!1sen!2sin" width="100%" height="300" style="border:0;display:block;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    
+    <p class="section-label">Gift ideas (stongly encouraged and appreciated 👀)</p>
+
+    <div class="gift-list">
+
+      <div class="gift-card">
+        <img src="lego.jpg" class="gift-img" />
+        <div class="gift-info">
+          <div class="gift-title">Lego Pokémon Set</div>
+          <div class="gift-sub">Finally. Something practical.</div>
+        </div>
+        <a href="https://www.lego.com/en-in/product/venusaur-charizard-and-blastoise-72153" target="_blank" class="gift-btn">Buy</a>
+      </div>
+
+      <div class="gift-card">
+        <img src="mercedes.jpg" class="gift-img" />
+        <div class="gift-info">
+          <div class="gift-title">Mercedes G Wagon</div>
+          <div class="gift-sub">For quick grocery runs.</div>
+        </div>
+        <a href="https://www.mercedes-benz.co.in/passengercars/models/suv/g-class/overview.html" target="_blank" class="gift-btn">Buy</a>
+      </div>
+
+      <div class="gift-card">
+        <img src="stock.jpg" class="gift-img" />
+        <div class="gift-info">
+          <div class="gift-title">Apple Stock</div>
+          <div class="gift-sub">Long-term thinking.</div>
+        </div>
+        <a href="https://www.apple.com/investor/" target="_blank" class="gift-btn">Invest</a>
+      </div>
+
+      <div class="gift-card">
+        <img src="gold.jpg" class="gift-img" />
+        <div class="gift-info">
+          <div class="gift-title">Gold Bar</div>
+          <div class="gift-sub">Solid. Literally.</div>
+        </div>
+        <a href="https://www.mmtcpamp.com/shop/gold/gold-bar" target="_blank" class="gift-btn">Buy</a>
+      </div>
+
+    </div>
+
+    <p class="section-label">Draw something for Aman</p>
+    <p class="body mb-16">A cake, a portrait, a vibe — anything.</p>
+    <canvas id="drawCanvas"></canvas>
+    <div class="draw-controls">
+      <div class="swatch active" style="background:#fff" onclick="setColor('#fff')" data-c="#fff"></div>
+      <div class="swatch" style="background:#FF5C8A" onclick="setColor('#FF5C8A')" data-c="#FF5C8A"></div>
+      <div class="swatch" style="background:#F5C842" onclick="setColor('#F5C842')" data-c="#F5C842"></div>
+      <div class="swatch" style="background:#6EE7B7" onclick="setColor('#6EE7B7')" data-c="#6EE7B7"></div>
+      <div class="swatch" style="background:#78AAFF" onclick="setColor('#78AAFF')" data-c="#78AAFF"></div>
+      <div class="swatch" style="background:#C084FC" onclick="setColor('#C084FC')" data-c="#C084FC"></div>
+      <button class="tool-btn" onclick="clearCanvas()">Clear</button>
+      <input type="range" min="2" max="22" value="4" id="brushSize"
+      style="flex:1;min-width:60px;accent-color:#fff;height:2px;">
+    </div>
+
+    <p class="section-label">Leave a message</p>
+    <textarea id="guestMsg" placeholder="A birthday wish, an inside joke, anything..."></textarea>
+
+    <button class="btn btn-white btn-full mt-24" id="submitBtn" onclick="submitAll()">Send it to Aman 🎁</button>
+    <div style="height:48px"></div>
+  </div>
+</div>
+
+<!-- ── SCREEN 5: DONE ── -->
+<div class="screen" id="s-done">
+  <div class="wrap">
+    <div class="done-hero">🎂</div>
+    <h2 class="display-sm">You're all<br>set.</h2>
+    <p class="body-lg mt-16 mb-32" id="doneMsg"></p>
+    <div style="height:48px"></div>
+  </div>
+</div>
+
+<script>
+
+  let foodPref = null;
+  let alcoholPref = null;
+  let customAlcohol = '';
+  let guestName='', isAttending=true, answers=[], assignedSong=null, currentQ=0;
+
+  const questions=[
+    {text:"It's Saturday night. Where are you?",options:[
+      {emoji:'🕺',label:'On the dance floor, obviously',tag:'hype'},
+      {emoji:'🛋️',label:'On the couch, half-asleep',tag:'chill'},
+      {emoji:'🍸',label:'At the bar, deep in conversation',tag:'smooth'},
+      {emoji:'🌙',label:'Rooftop, staring at the sky',tag:'vibe'},
+    ]},
+    {text:"Pick your energy for the party.",options:[
+      {emoji:'🔥',label:'Unhinged. Absolutely feral.',tag:'hype'},
+      {emoji:'😎',label:'Cool, composed, arrived late on purpose',tag:'smooth'},
+      {emoji:'🥂',label:'Elegant chaos — classy but unhinged',tag:'bop'},
+      {emoji:'🎭',label:'Here for the drama and the memories',tag:'vibe'},
+    ]},
+    {text:"What's your go-to move when a banger drops?",options:[
+      {emoji:'💃',label:'Immediately to the centre of the floor',tag:'hype'},
+      {emoji:'🫶',label:'Sway gently with your drink raised',tag:'chill'},
+      {emoji:'🫵',label:'Point at everyone like you wrote it',tag:'bop'},
+      {emoji:'👀',label:'Film everyone else having fun',tag:'smooth'},
+    ]},
+    {text:"Aman's turning 29. Your toast goes something like...",options:[
+      {emoji:'🎤',label:'"Let\'s get absolutely unhinged tonight"',tag:'hype'},
+      {emoji:'🥹',label:'"You\'re my favourite person, I mean it"',tag:'vibe'},
+      {emoji:'🤌',label:'"29 looks annoyingly good on you"',tag:'smooth'},
+      {emoji:'🎊',label:'"Speech over. DJ, please."',tag:'bop'},
+    ]},
+    {text:"Last one. Pick a late-night snack.",options:[
+      {emoji:'🍕',label:'Cold pizza, eaten standing up',tag:'hype'},
+      {emoji:'🍜',label:'Maggi at 2am — non-negotiable',tag:'chill'},
+      {emoji:'🍫',label:'Something fancy from the dessert table',tag:'smooth'},
+      {emoji:'🫙',label:'Chips, shared with whoever\'s left',tag:'bop'},
+    ]}
+  ];
+
+  const songs={
+    hype:[{
+      title:'Solo',
+      artist:'Fred again... & Blanco',
+      albumArt:'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/48/37/a6/4837a601-2dd1-d873-825f-b6cebff7d99d/5026854264233.jpg/632x632bb.webp',preview:'https://embed.music.apple.com/in/album/solo/1854516848?i=1854517371',
+      vibe:"You're bringing chaotic main-character energy.",
+      outfit:"Dark, edgy, slightly unhinged."
+    }],
+    smooth:[{
+      title:'Life is Simple in the Moonlight',
+      artist:'The Strokes',
+      albumArt:'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/8a/90/df/8a90dff0-73c6-c483-ab79-6810308414a2/884977195552.jpg/632x632bf.webp',preview:'https://embed.music.apple.com/in/album/life-is-simple-in-the-moonlight/581797918?i=581797973',
+      vibe:"Effortlessly cool, slightly mysterious.",
+      outfit:"Minimal, tailored, quiet luxury."
+    }],
+    chill:[{
+      title:'swag w/ kav',
+      artist:'Joy Orbison',
+      albumArt:'https://is1-ssl.mzstatic.com/image/thumb/Video125/v4/c2/48/4a/c2484a25-5622-9be3-901b-e412f1ca779e/Job30ec2cd2-2e79-4bc5-a3d6-62117459c266-122066111-PreviewImage_preview_image_nonvideo_sdr-Time1629840225232.png/632x632bb.webp',preview:'https://embed.music.apple.com/in/album/swag-w-kav-feat-james-massiah-bathe/1574302065?i=1574302415',
+      vibe:"Lowkey, understated, but deeply cool.",
+      outfit:"Relaxed silhouettes, soft textures."
+    }],
+    bop:[{
+      title:'Diamond Cut',
+      artist:'Overmono',
+      albumArt:'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/ce/51/26/ce512661-fb31-3ff0-f24e-8c0dfe43e1cb/191404119853.png/632x632bb.webp',preview:'https://embed.music.apple.com/in/album/diamond-cut/1585101730?i=1585101731',
+      vibe:"Sharp, high-energy, effortlessly stylish.",
+      outfit:"Futuristic, clean, slightly experimental."
+    }],
+    vibe:[{
+      title:'peace u need',
+      artist:'Fred again... & Joy Anonymous',
+      albumArt:'https://is1-ssl.mzstatic.com/image/thumb/Video221/v4/db/87/f7/db87f785-f592-6f70-be57-dc9fa1e1e902/Job6c959b4e-b284-455d-b4ab-5aabaf21a9c6-175220103-PreviewImage_Preview_Image_Intermediate_nonvideo_sdr_341917672_1887598306-Time1725893214789.png/632x632bb.webp',preview:'https://embed.music.apple.com/in/album/peace-u-need/1760178389?i=1760179415',
+      vibe:"Emotional, atmospheric, quietly magnetic.",
+      outfit:"Soft tones, flowy fits, dreamy."
+    }]
+  };
+
+  function assignSong(ans){
+    const counts={};
+    ans.forEach(a=>{counts[a]=(counts[a]||0)+1;});
+    const top=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0][0];
+    const pool=songs[top]||songs.hype;
+    return pool[0];
+  }
+
+  function showScreen(id){
+    document.querySelectorAll('.screen').forEach(s=>{s.classList.remove('active');s.style.display='none';});
+    const el=document.getElementById(id);
+    el.style.display='flex';
+    requestAnimationFrame(()=>el.classList.add('active'));
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+
+  function setAttend(val){
+    isAttending=val;
+    document.getElementById('optYes').classList.toggle('active',val);
+    document.getElementById('optNo').classList.toggle('active',!val);
+    document.getElementById('notAttendingNote').style.display=val?'none':'block';
+  }
+
+  function setFood(val){
+    foodPref = val;
+    document.getElementById('foodVeg').classList.toggle('selected', val==='veg');
+    document.getElementById('foodNonVeg').classList.toggle('selected', val==='nonveg');
+  }
+
+  function setAlcohol(e, val){
+    alcoholPref = val;
+
+  // ✅ remove selection from ALL alcohol buttons
+    document.querySelectorAll('#alcoholOptions .option-btn')
+    .forEach(btn => btn.classList.remove('selected'));
+
+  // ✅ select only clicked one
+    e.currentTarget.classList.add('selected');
+
+  // ✅ toggle custom input
+    const input = document.getElementById('customAlcohol');
+    input.style.display = val === 'other' ? 'block' : 'none';
+
+  // optional: clear custom value if switching away
+    if(val !== 'other') {
+      input.value = '';
+    }
+  }
+
+  function startQuizFromPrefs(){
+    if(!foodPref || !alcoholPref){
+      alert('Select preferences');
+      return;
+    }
+    answers=[];
+    currentQ=0;
+    renderQuestion();
+    showScreen('s-quiz');
+  }
+
+  function startQuiz(){
+    guestName=document.getElementById('nameInput').value.trim();
+
+    if(!guestName){
+      const inp=document.getElementById('nameInput');
+      inp.focus();
+      inp.style.borderColor='rgba(255,80,80,0.6)';
+      inp.addEventListener('input',()=>inp.style.borderColor='',{once:true});
+      return;
+    }
+
+    if(isAttending){
+      showScreen('s-preferences');
+    } else {
+      answers=[];
+      currentQ=0;
+      renderQuestion();
+      showScreen('s-quiz');
+    }
+  }
+
+  function renderQuestion(){
+    const q=questions[currentQ];
+    document.getElementById('qNumber').textContent=`${currentQ+1} / ${questions.length}`;
+    document.getElementById('progressFill').style.width=`${(currentQ/questions.length)*100}%`;
+    const qEl=document.getElementById('qText');
+    qEl.style.cssText='opacity:0;transform:translateY(10px);transition:opacity 0.35s ease,transform 0.35s ease';
+    qEl.textContent=q.text;
+    requestAnimationFrame(()=>{qEl.style.opacity='1';qEl.style.transform='translateY(0)';});
+    const grid=document.getElementById('optionsGrid');
+    grid.innerHTML='';
+    q.options.forEach((opt,i)=>{
+      const btn=document.createElement('button');
+      btn.className='option-btn';
+      btn.style.cssText='opacity:0;transform:translateY(12px)';
+      btn.innerHTML=`<span class="option-emoji">${opt.emoji}</span><span class="option-label">${opt.label}</span>`;
+      btn.addEventListener('click',()=>selectAnswer(opt.tag,btn));
+      grid.appendChild(btn);
+      setTimeout(()=>{btn.style.transition='opacity 0.3s ease,transform 0.3s ease,border-color 0.2s,background 0.2s';btn.style.opacity='1';btn.style.transform='translateY(0)';},i*60+80);
+    });
+  }
+
+  function selectAnswer(tag,btn){
+    document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    answers.push(tag);
+    setTimeout(()=>{currentQ++;currentQ<questions.length?renderQuestion():revealSong();},360);
+  }
+
+  function revealSong(){
+    assignedSong=assignSong(answers);
+    document.getElementById('revealTitle').textContent=assignedSong.title;
+    document.getElementById('revealArtist').textContent=assignedSong.artist;
+    document.getElementById('revealVibe').textContent=assignedSong.vibe;
+    document.getElementById('songOutfitHint').textContent=assignedSong.outfit;
+    const bg=document.getElementById('songBg');
+    const art=document.getElementById('albumArt');
+    if(assignedSong.albumArt){
+      bg.style.backgroundImage=`url(${assignedSong.albumArt})`;
+      window.currentAlbumArt = assignedSong.albumArt;
+
+      art.style.background='';
+      const img=document.getElementById('albumImg');
+      img.src=assignedSong.albumArt;
+      img.style.display='block';
+      img.style.opacity='0';
+      img.style.transform='scale(0.95)';
+      setTimeout(()=>{
+        img.style.transition='all 0.5s ease';
+        img.style.opacity='1';
+        img.style.transform='scale(1)';
+      },50);
+      document.getElementById('albumPlaceholder').style.display='none';
+    } else {
+      bg.style.backgroundImage=''; bg.style.background=assignedSong.bgGradient;
+      art.style.background=assignedSong.bgGradient;
+      document.getElementById('albumPlaceholder').style.display='flex';
+      document.getElementById('albumImg').style.display='none';
+    }
+    document.getElementById('progressFill').style.width='100%';
+// render embed
+    const embedContainer=document.getElementById('songEmbed');
+    if(embedContainer && assignedSong.preview){
+      embedContainer.innerHTML=`<iframe src="${assignedSong.preview}" height="150" frameborder="0" allow="autoplay *; encrypted-media *;" style="width:100%;border-radius:12px;"></iframe>`;
+      requestAnimationFrame(()=>{
+        embedContainer.style.opacity='1';
+        embedContainer.style.transform='translateX(-50%) translateY(0)';
+      });
+    }
+
+
+// dynamic color extraction + lighting
+    const imgForColor = new Image();
+    imgForColor.crossOrigin = "anonymous";
+    imgForColor.src = assignedSong.albumArt;
+
+    imgForColor.onload = function() {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = 50;
+      canvas.height = 50;
+      ctx.drawImage(imgForColor, 0, 0, 50, 50);
+
+      const data = ctx.getImageData(0, 0, 50, 50).data;
+      let r=0,g=0,b=0,count=0;
+
+      for (let i = 0; i < data.length; i += 20) {
+        r += data[i];
+        g += data[i+1];
+        b += data[i+2];
+        count++;
+      }
+
+      r = Math.floor(r/count);
+      g = Math.floor(g/count);
+      b = Math.floor(b/count);
+
+      window.partyColor = [r, g, b];
+
+      const tint = `rgba(${r}, ${g}, ${b}, 0.25)`;
+
+// apply tint to cards
+      document.querySelectorAll('.glass-card').forEach(el => {
+        el.style.background = `linear-gradient(180deg, ${tint}, rgba(0,0,0,0.35))`;
+      });
+
+// lighting overlay shift
+      const tintLayer = document.getElementById('bgTint');
+      if (tintLayer) {
+        tintLayer.style.background = `radial-gradient(circle at 30% 30%, rgba(${r},${g},${b},0.25), transparent 60%)`;
+      }
+    };
+
+    document.querySelector('.ambient').classList.add('hidden');
+    showScreen('s-song');
+
+// staggered reveal
+    const title=document.getElementById('revealTitle');
+    const artist=document.getElementById('revealArtist');
+    const cards=document.querySelectorAll('#s-song .glass-card');
+
+    title.style.opacity='0';
+    artist.style.opacity='0';
+    cards.forEach(c=>c.style.opacity='0');
+
+    setTimeout(()=>{
+     title.style.transition='all 0.5s ease';
+     title.style.opacity='1';
+   },200);
+
+    setTimeout(()=>{
+     artist.style.transition='all 0.5s ease';
+     artist.style.opacity='1';
+   },350);
+
+    cards.forEach((card,i)=>{
+     setTimeout(()=>{
+      card.style.transition='all 0.5s ease';
+      card.style.opacity='1';
+      card.style.transform='translateY(0)';
+    },500+(i*120));
+   });
+
+// safe cinematic reveal
+    const wrap = document.querySelector('#s-song .wrap');
+    if (wrap) {
+      wrap.style.opacity = '0';
+      wrap.style.transform = 'translateY(20px)';
+      wrap.style.transition = 'all 0.6s ease';
+
+      setTimeout(() => {
+        wrap.style.opacity = '1';
+        wrap.style.transform = 'translateY(0)';
+      }, 80);
+    }
+  }
+
+  function applyBackground(){
+    const bg = document.getElementById('songBg');
+    if(bg && window.currentAlbumArt){
+      bg.style.backgroundImage = `url(${window.currentAlbumArt})`;
+      bg.style.backgroundSize = 'cover';
+      bg.style.backgroundPosition = 'center';
+    }
+  }
+
+  function goToDetails(){
+    document.getElementById('detailsHeadline').innerHTML=isAttending?'See you<br>there.':"You'll be<br>missed.";
+    document.getElementById('detailsIntro').textContent=isAttending
+    ?`Your song is ${assignedSong.title} by ${assignedSong.artist}. Let it inspire your look. Can't wait to see you on May 30th.`
+    :`Even though you can't make it, your song is ${assignedSong.title} by ${assignedSong.artist}. Consider it a party favour from afar 🎁`;
+
+    showScreen('s-details');
+
+// 👇 THIS LINE FIXES IT
+    applyBackground();
+
+    setTimeout(initCanvas,200);
+  }
+
+  function addToCalendar(e){
+    e.preventDefault();
+    const t=encodeURIComponent("Aman's 29th Birthday 🎂"),l=encodeURIComponent('A-21, Sector 53, Noida'),d=encodeURIComponent("Dress as your song. It's going to be a night.");
+    window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${t}&dates=20250530T200000/20250531T010000&location=${l}&details=${d}`,'_blank');
+  }
+
+  let drawing=false,brushColor='#fff',brushSize=4,ctx2;
+  function initCanvas(){
+    const canvas=document.getElementById('drawCanvas');
+    if(ctx2)return;
+    const dpr=window.devicePixelRatio||1,rect=canvas.getBoundingClientRect();
+    canvas.width=rect.width*dpr;canvas.height=rect.height*dpr;
+    ctx2=canvas.getContext('2d');ctx2.scale(dpr,dpr);
+    ctx2.strokeStyle=brushColor;ctx2.lineWidth=brushSize;ctx2.lineCap='round';ctx2.lineJoin='round';
+    const gp=e=>{const r=canvas.getBoundingClientRect(),s=e.touches?e.touches[0]:e;return{x:s.clientX-r.left,y:s.clientY-r.top};};
+    canvas.addEventListener('mousedown',e=>{drawing=true;const p=gp(e);ctx2.beginPath();ctx2.moveTo(p.x,p.y);});
+    canvas.addEventListener('mousemove',e=>{if(!drawing)return;const p=gp(e);ctx2.lineTo(p.x,p.y);ctx2.stroke();});
+    canvas.addEventListener('mouseup',()=>drawing=false);
+    canvas.addEventListener('mouseleave',()=>drawing=false);
+    canvas.addEventListener('touchstart',e=>{e.preventDefault();drawing=true;const p=gp(e);ctx2.beginPath();ctx2.moveTo(p.x,p.y);},{passive:false});
+    canvas.addEventListener('touchmove',e=>{e.preventDefault();if(!drawing)return;const p=gp(e);ctx2.lineTo(p.x,p.y);ctx2.stroke();},{passive:false});
+    canvas.addEventListener('touchend',()=>drawing=false);
+    document.getElementById('brushSize').addEventListener('input',e=>{brushSize=e.target.value;ctx2.lineWidth=brushSize;});
+  }
+  function setColor(c){brushColor=c;if(ctx2)ctx2.strokeStyle=c;document.querySelectorAll('.swatch').forEach(s=>s.classList.toggle('active',s.dataset.c===c));}
+  function clearCanvas(){if(!ctx2)return;ctx2.clearRect(0,0,document.getElementById('drawCanvas').width,document.getElementById('drawCanvas').height);}
+
+  const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdxbgSyJSqglPee6MhB6iBTgp7_etcTC0jCCH5kaZ-W0J2pZg/formResponse";
+/* ========================= */
+/* CLOUDINARY UPLOAD         */
+/* ========================= */
+
+  async function uploadDrawingToCloudinary() {
+    const canvas = document.getElementById('drawCanvas');
+
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(async (blob) => {
+        try {
+          const formData = new FormData();
+          formData.append("file", blob);
+
+        // ✅ YOUR PRESET
+          formData.append("upload_preset", "birthday_drawings");
+
+          const res = await fetch(
+          "https://api.cloudinary.com/v1_1/dp3lu68ez/image/upload", // ✅ YOUR CLOUD NAME
+          {
+            method: "POST",
+            body: formData
+          }
+          );
+
+          const data = await res.json();
+          resolve(data.secure_url);
+        } catch (err) {
+          reject(err);
+        }
+      }, "image/jpeg", 0.6);
+    });
+  }
+  async function submitAll() {
+    const btn = document.getElementById('submitBtn');
+    const msg = document.getElementById('guestMsg').value;
+
+  // 🔄 Processing state
+    btn.disabled = true;
+    btn.textContent = "Sending...";
+
+    let drawingURL = '';
+
+    try {
+      drawingURL = await uploadDrawingToCloudinary();
+    } catch(e) {
+      console.log('Drawing upload failed', e);
+    }
+
+    const customAlcohol = document.getElementById('customAlcohol').value;
+
+    const fd = new FormData();
+
+    fd.append("entry.1608364228", guestName);
+    fd.append("entry.1758043497", assignedSong ? `${assignedSong.title} — ${assignedSong.artist}` : '');
+    fd.append("entry.123185303", isAttending ? "Yes" : "No");
+    fd.append("entry.1623777210", msg);
+    fd.append("entry.840088554", drawingURL);
+    fd.append("entry.629818051", foodPref || '');
+    fd.append("entry.963233426", alcoholPref || '');
+    fd.append("entry.1807480116", customAlcohol || '');
+
+    fetch(GOOGLE_FORM_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: fd
+    });
+
+  // 🎉 CONFETTI BURST
+    const base = window.partyColor || [255,255,255];
+
+    const colors = [
+      `rgb(${base[0]}, ${base[1]}, ${base[2]})`,
+      `rgba(${base[0]}, ${base[1]}, ${base[2]}, 0.6)`,
+      '#ffffff'
+    ];
+
+    confetti({
+      particleCount: 120,
+      spread: 80,
+      origin: { y: 0.6 },
+      colors: colors
+    });
+
+    setTimeout(() => {
+      confetti({
+        particleCount: 80,
+        spread: 100,
+        origin: { y: 0.7 },
+        colors: colors
+      });
+    }, 300);
+
+  // ⏳ Delay before showing final screen
+    setTimeout(() => {
+      document.getElementById('doneMsg').textContent = isAttending
+      ? 'See you on May 30th. Your song is in the mix — start getting inspired. 🎵'
+      : "You'll be missed. Your song is still yours — Aman's thinking of you 💛";
+
+      const hero = document.querySelector('.done-hero');
+      if (hero && window.partyColor) {
+        const [r,g,b] = window.partyColor;
+        hero.style.textShadow = `0 0 20px rgba(${r},${g},${b},0.6)`;
+      }
+
+      showScreen('s-done');
+    }, 900);
+  }
+
+  document.querySelectorAll('.screen').forEach(s=>{if(!s.classList.contains('active'))s.style.display='none';});
+</script>
+<div id="songEmbed"></div>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</body>
+</html>
