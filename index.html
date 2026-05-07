@@ -329,14 +329,27 @@ floaty 3s ease-in-out infinite 0.6s;
 .mb-24{margin-bottom:24px}.mb-32{margin-bottom:32px}
 
 #songEmbed {
-position: fixed;
-bottom: 20px;
-left: 50%;
-transform: translateX(-50%) translateY(10px);
-width: min(520px, 92%);
-z-index: 9999;
-opacity: 0;
-transition: opacity 0.4s ease, transform 0.4s ease;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+
+  width: min(520px, 92%);
+  z-index: 9999;
+
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+#songEmbed iframe {
+  opacity: 0.8;
 }
 
 .album-art::before {
@@ -367,6 +380,10 @@ margin:0 auto 24px;
 display:block;
 border-radius:18px;
 object-fit:cover;
+}
+
+#songCTA {
+  margin-bottom: 90px;
 }
 
 /* Hide orbs */
@@ -791,7 +808,7 @@ Continue →
     </div>
   </div>
 
-  <button class="btn btn-white btn-full" onclick="goToDetails()">See party details →</button>
+  <button class="btn btn-white btn-full" id="songCTA" onclick="goToDetails()">See party details →</button>
 </div>
 
 </div>
@@ -969,35 +986,35 @@ const songs={
 hype:[{
   title:'Solo',
   artist:'Fred again... & Blanco',
-  albumArt:'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/48/37/a6/4837a601-2dd1-d873-825f-b6cebff7d99d/5026854264233.jpg/632x632bb.webp',preview:'https://embed.music.apple.com/in/album/solo/1854516848?i=1854517371',
+  albumArt:'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/48/37/a6/4837a601-2dd1-d873-825f-b6cebff7d99d/5026854264233.jpg/632x632bb.webp',preview:'https://embed.music.apple.com/in/album/solo/1854516848?i=1854517371?theme=dark',
   vibe:"You're bringing chaotic main-character energy.",
   outfit:"Dark, edgy, slightly unhinged."
 }],
 smooth:[{
   title:'Life is Simple in the Moonlight',
   artist:'The Strokes',
-  albumArt:'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/8a/90/df/8a90dff0-73c6-c483-ab79-6810308414a2/884977195552.jpg/632x632bf.webp',preview:'https://embed.music.apple.com/in/album/life-is-simple-in-the-moonlight/581797918?i=581797973',
+  albumArt:'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/8a/90/df/8a90dff0-73c6-c483-ab79-6810308414a2/884977195552.jpg/632x632bf.webp',preview:'https://embed.music.apple.com/in/album/life-is-simple-in-the-moonlight/581797918?i=581797973?theme=dark',
   vibe:"Effortlessly cool, slightly mysterious.",
   outfit:"Minimal, tailored, quiet luxury."
 }],
 chill:[{
   title:'swag w/ kav',
   artist:'Joy Orbison',
-  albumArt:'https://is1-ssl.mzstatic.com/image/thumb/Video125/v4/c2/48/4a/c2484a25-5622-9be3-901b-e412f1ca779e/Job30ec2cd2-2e79-4bc5-a3d6-62117459c266-122066111-PreviewImage_preview_image_nonvideo_sdr-Time1629840225232.png/632x632bb.webp',preview:'https://embed.music.apple.com/in/album/swag-w-kav-feat-james-massiah-bathe/1574302065?i=1574302415',
+  albumArt:'https://is1-ssl.mzstatic.com/image/thumb/Video125/v4/c2/48/4a/c2484a25-5622-9be3-901b-e412f1ca779e/Job30ec2cd2-2e79-4bc5-a3d6-62117459c266-122066111-PreviewImage_preview_image_nonvideo_sdr-Time1629840225232.png/632x632bb.webp',preview:'https://embed.music.apple.com/in/album/swag-w-kav-feat-james-massiah-bathe/1574302065?i=1574302415?theme=dark',
   vibe:"Lowkey, understated, but deeply cool.",
   outfit:"Relaxed silhouettes, soft textures."
 }],
 bop:[{
   title:'Diamond Cut',
   artist:'Overmono',
-  albumArt:'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/ce/51/26/ce512661-fb31-3ff0-f24e-8c0dfe43e1cb/191404119853.png/632x632bb.webp',preview:'https://embed.music.apple.com/in/album/diamond-cut/1585101730?i=1585101731',
+  albumArt:'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/ce/51/26/ce512661-fb31-3ff0-f24e-8c0dfe43e1cb/191404119853.png/632x632bb.webp',preview:'https://embed.music.apple.com/in/album/diamond-cut/1585101730?i=1585101731?theme=dark',
   vibe:"Sharp, high-energy, effortlessly stylish.",
   outfit:"Futuristic, clean, slightly experimental."
 }],
 vibe:[{
   title:'peace u need',
   artist:'Fred again... & Joy Anonymous',
-  albumArt:'https://is1-ssl.mzstatic.com/image/thumb/Video221/v4/db/87/f7/db87f785-f592-6f70-be57-dc9fa1e1e902/Job6c959b4e-b284-455d-b4ab-5aabaf21a9c6-175220103-PreviewImage_Preview_Image_Intermediate_nonvideo_sdr_341917672_1887598306-Time1725893214789.png/632x632bb.webp',preview:'https://embed.music.apple.com/in/album/peace-u-need/1760178389?i=1760179415',
+  albumArt:'https://is1-ssl.mzstatic.com/image/thumb/Video221/v4/db/87/f7/db87f785-f592-6f70-be57-dc9fa1e1e902/Job6c959b4e-b284-455d-b4ab-5aabaf21a9c6-175220103-PreviewImage_Preview_Image_Intermediate_nonvideo_sdr_341917672_1887598306-Time1725893214789.png/632x632bb.webp',preview:'https://embed.music.apple.com/in/album/peace-u-need/1760178389?i=1760179415?theme=dark',
   vibe:"Emotional, atmospheric, quietly magnetic.",
   outfit:"Soft tones, flowy fits, dreamy."
 }]
